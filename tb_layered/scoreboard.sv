@@ -154,6 +154,4 @@ task scoreboard::print_test_result( input string result );
   else $display("\033[1;31m*                     TEST %s                      *\033[0m", result);
   $display("********************************************************");
 
-  //$finish(2);
-
 endtask : print_test_result
