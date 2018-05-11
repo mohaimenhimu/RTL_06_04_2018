@@ -66,8 +66,6 @@ task driver::run_sim_transmit_m0090();
 				    error
 				  );
 		$display("Wrote character \"%s\" into TXBUF @%t", character, $time);
-
-		//wait for transmission to take place
 		
 		/*while(status[6]) begin 
 
