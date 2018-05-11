@@ -28,10 +28,6 @@ task automatic driver::reg_access( input        [31:0] address,      // register
                 begin : wait_for_resp
 
                     wait(uif.pready);
-                    //$display("PREADY is Aseerted Here");
-                    /*@(posedge uif.clk);
-                    uif.psel        <= 1'b0;
-                    uif.penable     <= 1'b0;*/
                     
                     if((access_type == REG_RD) & uif.pslverr) begin
 
