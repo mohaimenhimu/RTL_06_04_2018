@@ -66,21 +66,8 @@ task driver::run_sim_transmit_m0090();
 				    error
 				  );
 		$display("Wrote character \"%s\" into TXBUF @%t", character, $time);
-
-		//wait for transmission to take place
 		
 		/*while(status[6]) begin 
-
-			reg_access( `UART_BASE_ADDRESS + `UART_STATUS_REGISTER,
-				        REG_RD,
-				        32'h0,
-				        4'h0,
-				        read_data,
-				        error
-				      );
-			status = read_data;
-
-		end
 
 		$display("\033[1;31mTransmission is in progress now.\tStatus : %10b\tTime : %t\033[0m",status, $realtime);*/
 		wait(uif.interrupt[0]);
