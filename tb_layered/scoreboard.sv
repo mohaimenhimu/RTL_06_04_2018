@@ -49,7 +49,6 @@ task scoreboard::scb_transmit();
 
 		if(!trn_drv.tx_brk_ctrl) begin : Data_Check
 
-			//$display("Tx Data Checker\n");
 			if(trn_drv.mode[1]^trn_drv.mode[0]) begin
 
 				trn_gen.pwdata[10:9] = {trn_drv.mode[2], 1'b1};
@@ -59,7 +58,6 @@ task scoreboard::scb_transmit();
 			end
 			else if(!(trn_drv.mode[1]^trn_drv.mode[0])) trn_gen.pwdata[10:8] = { 1'b0, trn_drv.mode[2], 1'b1 };
 
-			//$display("trn_drv.pwdata : %8b\ttrn_drv.pwdata[11:9] : %3b\ttrn_gen.pwdata : %8b\ttrn_gen.pwdata[10:8] : %3b", trn_drv.pwdata[8:1], trn_drv.pwdata[11:9], trn_gen.pwdata[7:0], trn_gen.pwdata[10:8]);
 			if({trn_gen.pwdata[10:0], 1'b0} == trn_drv.pwdata[11:0]) $display("\033[1;32mMatched!!!!\tTXBF Data : %s\tTXD Line Data : %s\033[0m", trn_gen.pwdata[7:0], trn_drv.pwdata[8:1]);
 			else begin
 				$display("\033[1;31mMismatched!!!!\tTXBF Data : %s\tTXD Line Data : %s\033[0m", {trn_gen.pwdata[10:0], 1'b0}, trn_drv.pwdata[11:0]);
