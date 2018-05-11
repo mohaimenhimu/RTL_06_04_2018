@@ -71,17 +71,6 @@ task driver::run_sim_transmit_m0090();
 		
 		/*while(status[6]) begin 
 
-			reg_access( `UART_BASE_ADDRESS + `UART_STATUS_REGISTER,
-				        REG_RD,
-				        32'h0,
-				        4'h0,
-				        read_data,
-				        error
-				      );
-			status = read_data;
-
-		end
-
 		$display("\033[1;31mTransmission is in progress now.\tStatus : %10b\tTime : %t\033[0m",status, $realtime);*/
 		wait(uif.interrupt[0]);
 		$display("\033[1;32mInterrupt has been asserted.\tStatus : %10b\tTime : %t\033[0m",status, $realtime);
