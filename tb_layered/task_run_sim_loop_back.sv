@@ -45,10 +45,10 @@ task driver::run_sim_loop_back();
                     error
                   );
         end : check_txbuf
-        
+
     while(read_data[5]);
 
-    character = trans.pwdata; 
+    character = trans.pwdata;
 
     reg_access( `UART_BASE_ADDRESS + `UART_TXBUF_REGISTER,
                 REG_WR,
@@ -93,23 +93,11 @@ task driver::run_sim_loop_back();
     trn_scb.special   = special;
     trn_scb.block_sel = block_sel;
     drv2scb.put(trn_scb);
-
-    //compare sent and received characters
     
-    /*if(read_data[7:0] != character) begin : data_mismatch
-
-        $display("\033[1;31mThere is a mismatch between sent and received character, sent %s, received %s\033[0m", character, read_data[7:0]);
-        print_test_result("\033[1;31mFAILED\033[0m");
-        $finish(2);
-
-    end : data_mismatch
-
-    $display("\033[1;32mWritten and read characters matched \033[0m\n");*/
-
     if(loop_count != 1) begin
 
         gen2drv.get(trans);
-        character = trans.pwdata; 
+        character = trans.pwdata;
 
     end
 
