@@ -21,7 +21,6 @@ endclass : scoreboard
 
 task scoreboard::scb_loopback();
 
-	//$display("Here : %d", LOOPBACK_CHARACTER_NUM);
 	repeat(LOOPBACK_CHARACTER_NUM) begin
 
 		if(trn_drv.pwdata[7:0] == trn_gen.pwdata[7:0]) $display("\033[1;32mMatched!!!!\tTXBF Data : %s\tRXBF Data : %s\033[0m", trn_gen.pwdata[7:0], trn_drv.pwdata[7:0]);
