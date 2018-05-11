@@ -1,17 +1,3 @@
-//*****************************************************************************
-// This test checks that UART correctly asserts OERR flag when 5 data bytes are
-// received without intermediate reads of RXBUF register (that is RXBUF gets
-// overflown)
-//
-// The sequence of steps is:
-//
-// 1) Wait for the end of reset, then wait 10 clocks
-// 2) Program MODE and INTC Registers
-// 3) Testbench sends 5 data bytes in a row
-// 4) Testbench waits for interrupt and checks if flag was asserted to 1
-//
-//*****************************************************************************
-
 print_test_config( `UART_STATUS_REGISTER,
                    mode,
                    interrupts_config,
