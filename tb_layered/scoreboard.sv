@@ -8,7 +8,7 @@ class scoreboard;
 
 		this.gen2scb = gen2scb;
 		this.drv2scb = drv2scb;
-	
+
 	endfunction
 
 	extern task scb_loopback();
@@ -33,7 +33,7 @@ task scoreboard::scb_loopback();
 		if(loop_count != 1) begin
 
 		    gen2scb.get(trn_gen);
-			drv2scb.get(trn_drv); 
+			drv2scb.get(trn_drv);
 
 		end
 
@@ -45,12 +45,9 @@ endtask : scb_loopback
 
 task scoreboard::scb_transmit();
 
-	
+
 	repeat(LOOPBACK_CHARACTER_NUM) begin
 
-		/*gen2scb.get(trn_gen);
-		drv2scb.get(trn_drv);*/
-		//$display("trn_drv.mode : %3b", trn_drv.mode[2:0]);
 		if(!trn_drv.tx_brk_ctrl) begin : Data_Check
 
 			//$display("Tx Data Checker\n");
@@ -87,13 +84,13 @@ task scoreboard::scb_transmit();
 		if(loop_count != 1) begin
 
 		    gen2scb.get(trn_gen);
-			drv2scb.get(trn_drv); 
+			drv2scb.get(trn_drv);
 
 		end
 
 	    loop_count--;
 
-	end   
+	end
 
 endtask : scb_transmit
 
@@ -110,7 +107,7 @@ task scoreboard::scb_receive();
 		if(loop_count != 1) begin
 
 		    gen2scb.get(trn_gen);
-			drv2scb.get(trn_drv); 
+			drv2scb.get(trn_drv);
 
 		end
 
@@ -124,7 +121,7 @@ task scoreboard::scb_control();
 
 	gen2scb.get(trn_gen);
 	drv2scb.get(trn_drv);
-	if(trn_drv.block_sel == 2'b00 && (trn_drv.special == 2'b00 || trn_drv.special == 2'b11)) begin  
+	if(trn_drv.block_sel == 2'b00 && (trn_drv.special == 2'b00 || trn_drv.special == 2'b11)) begin
 
         if(trn_drv.tx_brk_ctrl)	$display("\nEntering Scoreboard For Transmitter (Break Character Checking) ....\n");
         else if(!trn_drv.tx_brk_ctrl)	$display("\nEntering Scoreboard For Transmitter (Data Checking) ....\n");
@@ -140,7 +137,7 @@ task scoreboard::scb_control();
 
     end
     else if(trn_drv.block_sel == 2'b01 && trn_drv.special == 2'b00) begin
-        
+
         if((trn_drv.mode [9:8] == 2'b00 | trn_drv.mode [9:8] == 2'b01) && trn_drv.ins_errors == 2'b00) begin
         	$display("\nEntering Scoreboard For Receiver ....\n");
         	scb_receive();
