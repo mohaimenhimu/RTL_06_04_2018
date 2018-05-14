@@ -1,9 +1,9 @@
 `include "includes.sv"
 
-module uart_top_tb;                                      
-                                                         
+module uart_top_tb;
+
     bit clk;
-    
+
     always #5 clk = ~clk;
 
     uart_interface uif(clk);
@@ -32,12 +32,16 @@ module uart_top_tb;
                 .apb_rdata_o  ( uif.prdata    ),
                 .apb_ready_o  ( uif.pready    ),
                 .apb_err_o    ( uif.pslverr   ),
-                
+
                 //interrupt
 
                 .int_o        ( uif.interrupt ),
-                 
+
                 // external interface
+
+                `ifdef DRIVER
+                  int_o       (vua),
+                `endif
 
                 .cts_i        ( uif.cts       ),
                 .txd_o        ( uif.txd       ),
@@ -45,7 +49,7 @@ module uart_top_tb;
                 .rts_o        ( uif.rts       ),
                 .rx_trig_o    ( uif.rx_trig_o ),
                 .tx_trig_o    ( uif.tx_trig_o )
-); 
+);
 
 testcase_combined tc(uif);
 
@@ -57,4 +61,4 @@ initial begin
 
 end
 
-endmodule 
+endmodule
